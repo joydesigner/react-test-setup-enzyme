@@ -1,9 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import Enzyme, { shallow } from 'enzyme';
+import EnzymeAdpapter from 'enzyme-adapter-react-16';
+
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+Enzyme.configure({
+	adapter: new EnzymeAdpapter()
 });
+
+test('renders without crashing', () => {
+	const wrapper = shallow(<App />);
+	const appCompoment = wrapper.find("[data-test='component-app']");
+	expect(appCompoment.length).toBe(1);
+});
+
+test('renders increment button', () => {});
+
+test('renders counter display', () => {});
+
+test('counter starts at 0', () => {});
+
+test('click button increments counter display', () => {});
